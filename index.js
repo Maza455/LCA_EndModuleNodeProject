@@ -1,16 +1,20 @@
-import { userRouter, express } from "./controller/UserController.js";
-import {productRouter} from "./controller/ProductController.js";
-import "dotenv/config.js"
+import {
+    userRouter,
+    express
+} from "./controller/UserController.js";
+import {
+    productRouter
+} from "./controller/ProductController.js";
+import {
+    config
+} from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from 'path'
-import { isAuthenticatedRouter } from "./middleware/isAuthenticated.js";
-import { imageRouter } from "./controllers/ImageController.js";
-import { checkoutRouter } from "./controllers/CheckoutController.js";
-import { categoryRouter } from "./controllers/CategoryController.js";
-import { orderItemRouter } from "./controllers/OrderItemController.js";
-import { authenticationRouter } from "./middleware/Authentication.js";
-import {errorHandling} from "./middleware/ErrorHandling.js";
+import {
+    errorHandling
+} from "./middleware/ErrorHandling.js";
+config()
 
 const app = express()
 const port = +process.env.POST || 5500
@@ -35,19 +39,12 @@ app.use(
     cors()
 )
 app.get('^/$|/lifechoices', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, './static/index.html'))
+    res.status(200).sendFile(path.join(__dirname, './static/html/index.html'))
 })
 
 app.use('/Users', userRouter)
 app.use('/Products', productRouter)
-app.use('/OrderItem', orderItemRouter)
-app.use('/Image', imageRouter)
-app.use('/Category', categoryRouter)
-app.use('/Checkout', checkoutRouter)
 app.use(errorHandling)
-app.use(isAuthenticatedRouter)
-app.use(authenticationRouter)
-
-app.listen(port, ()=>{
+app.listen(port, () => {
     console.log(`Server is running at port ${port}`)
 })
