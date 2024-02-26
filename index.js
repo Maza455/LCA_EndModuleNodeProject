@@ -5,16 +5,13 @@ import {
 import {
     productRouter
 } from "./controller/ProductController.js";
-import {
-    config
-} from "dotenv";
+import 'dotenv/config.js'
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import path from 'path'
 import {
     errorHandling
 } from "./middleware/ErrorHandling.js";
-config()
 
 const app = express()
 const port = +process.env.POST || 5500
