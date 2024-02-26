@@ -14,7 +14,7 @@ import {
 } from "./middleware/ErrorHandling.js";
 
 const app = express()
-const port = +process.env.POST || 5500
+const port = +process.env.POST || 7500
 
 //Middleware
 app.use((req, res, next) => {
