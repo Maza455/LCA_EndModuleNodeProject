@@ -1,10 +1,10 @@
 import {
     connection as db
-} from "../config/index.js"
+} from "../config/config.js"
 class Products {
     fetchProducts(req, res) {
         const qry = `
-        SELECT prodID, prodName, prodQuantity,
+        SELECT pwdID, prodName, prodQuantity,
         prodAmount, userID
         FROM Products;
         `
@@ -18,7 +18,7 @@ class Products {
     }
     fetchProduct(req, res) {
         const qry = `
-        SELECT prodID, prodName, prodQuantity,
+        SELECT pwdID, prodName, prodQuantity,
         prodAmount, userID
         FROM Products
         WHERE prodID = ${req.params.id};
@@ -31,6 +31,7 @@ class Products {
             })
         })
     }
+
     addProduct(req, res) {
         const qry = `
         INSERT INTO Products
@@ -40,7 +41,7 @@ class Products {
             if (err) throw err
             res.json({
                 status: res.statusCode,
-                msg: 'New product was added'
+                mgs: "Successssful"
             })
         })
     }

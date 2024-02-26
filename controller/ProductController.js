@@ -1,13 +1,13 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import {productController} from '../models/index.js'
+import { products } from '../models/index.js'
 
 const productRouter = express.Router()
 
 //Fetch products
 productRouter.get('/', (req, res) => {
     try {
-        productController.fetchProducts(req, res)
+        products.fetchProducts(req, res)
     } catch (e) {
         res.json({
             status: res.statusCode,
@@ -17,20 +17,21 @@ productRouter.get('/', (req, res) => {
 });
 
 //Add a product
-productRouter.post('/add/', bodyParser.json(), (req, res) => {
+productRouter.post('/addProduct', bodyParser.json(), (req, res) => {
     try {
-        productController.createProduct(req, res)
-    } catch (e) {
+        products.createProduct(req, res)
+    }catch(e) {
         res.json({
             status: res.statusCode,
             msg: 'Failed to add a new product.'
         })
     }
-})
+});
+
 // Update a product
 productRouter.patch('/update/:id', bodyParser.json(), (req, res) => {
     try {
-        productController.updateProduct(req, res);
+        products.updateProduct(req, res);
     } catch (e) {
         res.json({
             status: res.statusCode,
@@ -42,7 +43,7 @@ productRouter.patch('/update/:id', bodyParser.json(), (req, res) => {
 // Delete a product
 productRouter.delete('/delete/:id', (req, res) => {
     try {
-        productController.deleteProduct(req, res);
+        products.deleteProduct(req, res);
     } catch (e) {
         res.json({
             status: res.statusCode,
@@ -52,6 +53,5 @@ productRouter.delete('/delete/:id', (req, res) => {
 });
 
 export {
-    productRouter,
-    express
+    productRouter
 };
