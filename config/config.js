@@ -12,8 +12,6 @@ let connection = createPool({
     connectionLimit: 30
 })
 
-// config()
-
 export {
     connection
 }

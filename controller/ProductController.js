@@ -1,10 +1,9 @@
 import express from 'express'
 import bodyParser from 'body-parser'
-import {
-    productController
-} from '../models/index.js'
+import {productController} from '../models/index.js'
 
 const productRouter = express.Router()
+
 //Fetch products
 productRouter.get('/', (req, res) => {
     try {
@@ -15,7 +14,8 @@ productRouter.get('/', (req, res) => {
             msg: 'Failed to retrieve products.'
         })
     }
-})
+});
+
 //Add a product
 productRouter.post('/add/', bodyParser.json(), (req, res) => {
     try {
@@ -30,7 +30,6 @@ productRouter.post('/add/', bodyParser.json(), (req, res) => {
 // Update a product
 productRouter.patch('/update/:id', bodyParser.json(), (req, res) => {
     try {
-        // const { id } = req.params;
         productController.updateProduct(req, res);
     } catch (e) {
         res.json({
@@ -39,10 +38,10 @@ productRouter.patch('/update/:id', bodyParser.json(), (req, res) => {
         })
     }
 });
+
 // Delete a product
 productRouter.delete('/delete/:id', (req, res) => {
     try {
-        // const { id } = req.params;
         productController.deleteProduct(req, res);
     } catch (e) {
         res.json({
@@ -51,17 +50,8 @@ productRouter.delete('/delete/:id', (req, res) => {
         })
     }
 });
-// productRouter.post('/login', bodyParser.json(), (req, res) => {
-//     try {
-//         // const { id } = req.params;
-//         productController.login(req, res);
-//     } catch (e) {
-//         res.json({
-//             status: res.statusCode,
-//             msg: 'Failed to login, try again.',
-//         })
-//     }
-// });
+
 export {
     productRouter,
+    express
 };
