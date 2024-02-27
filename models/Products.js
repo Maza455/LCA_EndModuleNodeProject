@@ -32,19 +32,30 @@ class Products {
         })
     }
 
-    addProduct(req, res) {
+    async createProduct(req, res) {
+        // Payload
+        let data = req.body;
+
         const qry = `
         INSERT INTO Products
         SET ?;
-        `
-        db.query(qry, [req.body], (err) => {
-            if (err) throw err
-            res.json({
-                status: res.statusCode,
-                mgs: "Successssful"
-            })
-        })
+    `;
+
+        db.query(qry, [data], (err) => {
+            if (err) {
+                res.json({
+                    status: res.statusCode,
+                    msg: 'Failed to add a new product.'
+                });
+            } else {
+                res.json({
+                    status: res.statusCode,
+                    msg: 'New product added successfully.'
+                });
+            }
+        });
     }
+    
     updateProduct(req, res) {
         const qry = `
         UPDATE Products

@@ -18,12 +18,10 @@ function createToken(user) {
 
 
 function verifyToken(req, res, next) {
-    // Retrieve a token from the request headers
     const token = req.headers['authorization'];
 
     if (token) {
-        // Check if the token is valid
-        jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+        jwt.verify(token, process.env.SECRET_KEY, (err, encoded) => {
             if (err) {
                 return res.status(401).json({
                     status: 401,
