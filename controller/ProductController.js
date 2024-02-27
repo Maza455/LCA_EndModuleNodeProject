@@ -1,6 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import { products } from '../models/index.js'
+import { verifyToken } from './UserController.js';
 
 const productRouter = express.Router()
 
