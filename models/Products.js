@@ -4,7 +4,7 @@ import {
 class Products {
     fetchProducts(req, res) {
         const qry = `
-        SELECT pwdID, prodName, prodQuantity,
+        SELECT prodID, prodName, prodQuantity,
         prodAmount, userID
         FROM Products;
         `
@@ -18,7 +18,7 @@ class Products {
     }
     fetchProduct(req, res) {
         const qry = `
-        SELECT pwdID, prodName, prodQuantity,
+        SELECT prodID, prodName, prodQuantity,
         prodAmount, userID
         FROM Products
         WHERE prodID = ${req.params.id};
@@ -60,7 +60,7 @@ class Products {
         const qry = `
         UPDATE Products
         SET ?
-        WHERE pwdID = ${req.params.id};
+        WHERE prodID = ${req.params.id};
         `
         db.query(qry, [req.body], (err) => {
             if (err) throw err
@@ -70,6 +70,7 @@ class Products {
             })
         })
     }
+    
     deleteProduct(req, res) {
         const qry = `
         DELETE FROM Products
