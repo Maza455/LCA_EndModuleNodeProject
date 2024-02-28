@@ -32,7 +32,7 @@ class Products {
         })
     }
 
-    async createProduct(req, res) {
+    createProduct(req, res) {
         // Payload
         let data = req.body;
 
