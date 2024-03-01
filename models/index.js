@@ -5,7 +5,7 @@ import {
     Products
 } from './Products.js';
 
-let users = new Users()
+const users = new Users()
 let products = new Products()
 
 export {

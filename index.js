@@ -14,7 +14,7 @@ import {
 } from "./middleware/ErrorHandling.js";
 
 const app = express()
-const port = +process.env.POST || 5500
+const port = +process.env.POST || 7500
 
 //Middleware
 app.use((req, res, next) => {
@@ -35,9 +35,11 @@ app.use(
     cookieParser(),
     cors()
 )
-app.get('^/$|/lifechoices', (req, res) => {
-    res.status(200).sendFile(path.join(__dirname, './static/html/index.html'))
-})
+// app.get('^/$|/endmoduleproject_connection', (req, res) => {
+//     res.status(200).sendFile(path.join(__dirname, './static/html/index.html'))
+// })
+
+app.use(express.static('static'))
 
 app.use('/Users', userRouter)
 app.use('/Products', productRouter)

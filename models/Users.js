@@ -1,6 +1,6 @@
 import {
     connection as db
-} from '../config/index.js'
+} from '../config/config.js'
 import {
     hash,
     compare
@@ -40,23 +40,6 @@ fetchUser(req, res) {
         })
     })
 }
-
-    // fetchUser(req, res) {
-    //     const qry = `
-    // SELECT userID, firstName, lastName,
-    //     userAge, gender, emailAdd, userPwd,
-    //     userRole
-    //     FROM Users
-    //     WHERE userID = ${req.params.id};
-    // `
-    //     db.query(qry, (err, result) => {
-    //         if (err) throw err
-    //         res.json({
-    //             status: res.statusCode,
-    //             result
-    //         })
-    //     })
-    // }
     
     async createUser(req, res) {
         // Payload
