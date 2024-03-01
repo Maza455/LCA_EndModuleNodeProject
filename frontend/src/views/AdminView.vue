@@ -31,18 +31,8 @@
                 </select>
             </div>
         </div>
-        <div v-if="showAddUserForm">
-        <input type="text" v-model="newUser.firstName" placeholder="First Name">
-        <input type="text" v-model="newUser.lastName" placeholder="Last Name">
-        <input type="number" v-model="newUser.userAge" placeholder="Age">
-        <input type="text" v-model="newUser.gender" placeholder="Gender">
-        <input type="email" v-model="newUser.emailAdd" placeholder="Email">
-        <input type="password" v-model="newUser.userPwd" placeholder="Password">
-        <input type="text" v-model="newUser.userRole" placeholder="User Role">
-        <button class="admin-btn" @click="addNewUser">Add User</button>
-    </div>
         <!-- Users Table -->
-        <table v-if="showUsers" id="usersTable">
+        <table v-if="users" id="usersTable">
             <!-- Table headers for users -->
             <thead>
                 <tr>
@@ -58,7 +48,7 @@
             </thead>
             <!-- Table body for users -->
             <tbody id="usersTableBody">
-                <tr v-for="user in usersData" :key="user.id">
+                <tr v-for="user in users" :key="user.userID">
                     <td>{{ user.userID }}</td>
                     <td>{{ user.firstName }}</td>
                     <td>{{ user.lastName }}</td>
@@ -67,15 +57,15 @@
                     <td>{{ user.emailAdd }}</td>
                     <td>{{ user.userPwd }}</td>
                     <td>{{ user.userRole }}</td>
-                    <td>
-                        <button @click="editUser(user)">Edit</button> <!-- Call editUser method with user data -->
-                        <button @click="deleteUser(user.id)">Delete</button> <!-- Call deleteUser method with user id -->
-                    </td>
                 </tr>
             </tbody>
         </table>
+        <br>
+        <br>
+        <br>
+        <br>
         <!-- Products Table -->
-        <table v-if="showProducts" id="productsTable">
+        <table v-if="products" id="productsTable">
             <!-- Table headers for products -->
             <thead>
                 <tr>
@@ -83,19 +73,22 @@
                     <th>Product Name</th>
                     <th>Quantity</th>
                     <th>Amount</th>
-                    <th>Image URL</th>
+                    <th>Description</th>
+                    <th>Image</th>
+                
                 </tr>
             </thead>
             <tbody id="productsTableBody">
-                <tr v-for="product in productsData" :key="product.id">
+                <tr v-for="product in products" :key="product.prodID">
                     <td>{{ product.prodID }}</td>
                     <td>{{ product.prodName }}</td>
                     <td>{{ product.prodQuantity }}</td>
                     <td>{{ product.prodAmount }}</td>
-                    <td>{{ product.imageURL }}</td>
+                    <td>{{ product.prodDesc }}</td>
                     <td>
-                        <button @click="editProduct(product)">Edit</button> <!-- Call editUser method with user data -->
-                        <button @click="deleteProduct(product.id)">Delete</button>
+                        <img class="img-fluid w-25" :src="product.imageURL" :alt="product.prodName"/>
+                        <button>edit</button>
+                        <button>delete</button>
                     </td>
                 </tr>
             </tbody>
@@ -110,74 +103,54 @@ export default {
         return {
             showUsers: false,
             showProducts: false,
-            showAddProductBtn: true,
-            showAddUserForm: true,
-            showAddUserBtn: true, // Added variable for showing Add User button
-            usersData: [],
-            productsData: [],
-            newUser: {
-                firstName: '',
-                lastName: '',
-                userAge: null,
-                gender: '',
-                emailAdd: '',
-                userPwd: '',
-                userRole: ''
-            }
+            showAddProductBtn: false,
+            showAddUserBtn: false,
+            usersData: null,
+            productsData: null
         };
+    },
+    computed: {
+        products() {
+            return this.$store.state.products
+        },
+        users() {
+            return this.$store.state.users
+        },
     },
     methods: {
         showUsersTable() {
             this.showUsers = true;
             this.showProducts = false;
             this.showAddProductBtn = false;
-            this.showAddUserForm = true;
-            // Fetch user data from the backend API
-            fetch('https://lca-endmodulenodeproject-1.onrender.com/Users')
-                .then(response => response.json())
-                .then(data => {
-                    this.usersData = data;
-                })
-                .catch(error => console.error('Error fetching user data:', error));
+            this.showAddUserBtn = false;
+              
         },
         showProductsTable() {
             this.showUsers = false;
             this.showProducts = true;
-            this.showAddProductBtn = true;
-            this.showAddProductForm = true;
-            // Fetch product data from the backend API
-            fetch('https://lca-endmodulenodeproject-1.onrender.com/Products')
-                .then(response => response.json())
-                .then(data => {
-                    this.productsData = data;
-                })
-                .catch(error => console.error('Error fetching product data:', error));
+            this.showAddProductBtn = false;
+            this.showAddUserBtn = false;
+           
         },
         addProduct() {
+            // Add product functionality
         },
-        addNewUser() {
-            fetch('https://lca-endmodulenodeproject-1.onrender.com/Users/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(this.newUser)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    this.usersData.push(data);
-                    this.newUser = {
-                        firstName: '',
-                        lastName: '',
-                        userAge: null,
-                        gender: '',
-                        emailAdd: '',
-                        userPwd: '',
-                        userRole: ''
-                    };
-                })
-                .catch(error => console.error('Error adding new user:', error));
+        addUser() {
+            // Add user functionality
+        },
+        sortEdition() {
+            // Sort by edition functionality
+        },
+        sortTitle() {
+            // Sort by title functionality
+        },
+        sortPrice() {
+            // Sort by price functionality
         }
+    },
+    mounted() {
+        this.$store.dispatch('fetchProducts'),
+        this.$store.dispatch('fetchUsers')
     }
 };
 </script>

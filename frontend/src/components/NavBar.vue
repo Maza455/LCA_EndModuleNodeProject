@@ -35,7 +35,7 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
-                    <input class="toggle desktop-show" type="checkbox" v-model="isDark" @click="toggleTheme">
+                    <!-- <input class="toggle desktop-show" type="checkbox" v-model="isDark" @click="toggleTheme"> -->
                 </li>
             </ul>
         </div>
@@ -46,21 +46,9 @@
 export default {
     data() {
         return {
-            isDark: false,
-        };
-    },
-    methods: {
-        toggleTheme() {
-            this.isDark = !this.isDark;
-            const body = document.body;
-            if (this.isDark) {
-                body.classList.add("dark-theme");
-            } else {
-                body.classList.remove("dark-theme");
-            }
-        },
-    },
-};
+        }
+    }
+        }
 </script>
 <style scoped>
 .logo {
@@ -77,12 +65,11 @@ export default {
 }
 
 .navbar {
-   background-color: black;
+   background-color: white;
 }
 
 .container-fluid {
-  background-color: black;
-  : white;
+  background-color: white;
 }
 .dark-theme .navbar-nav .nav-link {
     color: white;

@@ -22,7 +22,7 @@ We promise to deliver and always deliver on our promises.</p>
 .img2 {
   width: 100%;
   height: 30vh;
-  display: block;
+  display: flex;
   object-fit: cover;
 }
 
