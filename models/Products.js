@@ -1,11 +1,11 @@
 import {
     connection as db
-} from "../config/index.js"
+} from "../config/config.js"
 class Products {
     fetchProducts(req, res) {
         const qry = `
         SELECT prodID, prodName, prodQuantity,
-        prodAmount, userID
+        prodAmount, imageURL, userID
         FROM Products;
         `
         db.query(qry, (err, results) => {
@@ -19,7 +19,7 @@ class Products {
     fetchProduct(req, res) {
         const qry = `
         SELECT prodID, prodName, prodQuantity,
-        prodAmount, userID
+        prodAmount, imageURL, userID
         FROM Products
         WHERE prodID = ${req.params.id};
         `
@@ -31,19 +31,31 @@ class Products {
             })
         })
     }
-    addProduct(req, res) {
+
+    createProduct(req, res) {
+        // Payload
+        let data = req.body;
+
         const qry = `
         INSERT INTO Products
         SET ?;
-        `
-        db.query(qry, [req.body], (err) => {
-            if (err) throw err
-            res.json({
-                status: res.statusCode,
-                msg: 'New product was added'
-            })
-        })
+    `;
+
+        db.query(qry, [data], (err) => {
+            if (err) {
+                res.json({
+                    status: res.statusCode,
+                    msg: 'Failed to add a new product.'
+                });
+            } else {
+                res.json({
+                    status: res.statusCode,
+                    msg: 'New product added successfully.'
+                });
+            }
+        });
     }
+    
     updateProduct(req, res) {
         const qry = `
         UPDATE Products
@@ -58,6 +70,7 @@ class Products {
             })
         })
     }
+    
     deleteProduct(req, res) {
         const qry = `
         DELETE FROM Products
@@ -75,3 +88,5 @@ class Products {
 export {
     Products
 }
+
+// console.log('adding final touches')
