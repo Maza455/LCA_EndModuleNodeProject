@@ -16,6 +16,16 @@ productRouter.get('/', (req, res) => {
         })
     }
 });
+productRouter.get('/:id', (req, res) => {
+    try {
+        products.fetchProduct(req, res)
+    } catch (e) {
+        res.json({
+            status: res.statusCode,
+            msg: 'Failed to retrieve a single product.'
+        })
+    }
+});
 
 //Add a product
 productRouter.post('/addProduct', bodyParser.json(), (req, res) => {
