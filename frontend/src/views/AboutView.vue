@@ -5,11 +5,11 @@
   <h2 class="display-2">About</h2>
   <div>
   <p class="para2"> Platinum Meats Cooperation  aim to provide value, <br> supplying all our customers with the highest quality at the most reasonable price. <br>
-<i>Quality</i> <br>
+<b>Quality</b> <br>
 We take the utmost care to ensure that all our products meet your expectations. <br>
-Hygiene <br>
+<b>Hygiene</b> <br>
 Hygiene is one of our primary goals. We follow the highest food safety regulations. <br>
-Trust <br>
+<b>Trust</b> <br>
 We promise to deliver and always deliver on our promises.</p>
 </div>
 </template>
@@ -39,7 +39,7 @@ We promise to deliver and always deliver on our promises.</p>
 
 .para2 {
   text-align: center;
-  margin-top: 70px; 
+  margin-top: 10px; 
   font-size: 1.5em;
 
 }

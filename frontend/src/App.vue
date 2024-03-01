@@ -1,34 +1,44 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/About">About</router-link> |
-    <router-link to="/Products">Products</router-link> |
-    <router-link to="/Admin">Admin</router-link> |
-    <router-link to="/Contact">Contact</router-link> 
-  </nav>
-  <router-view/>
+  <NavBar />
+  <Spinner />
+  <main class="container-fluid">
+    <router-view />
+  </main>
+  <Footer />
 </template>
 
-<style>
+<script>
+import NavBar from './components/NavBar';
+import Footer from './components/Footer.vue';
+import Spinner from './components/Spinner.vue';
+export default {
+  components: {
+    NavBar,
+    Footer,
+    Spinner
+  }
+}
+</script>
+<style src="./assets/Css/style.css">
+img[alt='logo'] {
+  width: 3rem;
+  aspect-ratio: 1/1;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #2C3E50;
 }
-
 nav {
   padding: 30px;
-  background-color: black;
 }
-
 nav a {
   font-weight: bold;
-  color: white;
+  color: indigo;
 }
-
 nav a.router-link-exact-active {
-  color: rgb(255, 179, 0);
+  color: indianred;
 }
 </style>

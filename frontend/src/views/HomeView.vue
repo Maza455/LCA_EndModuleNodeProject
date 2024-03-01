@@ -53,7 +53,7 @@ h1 {
   color: white;
   background-color: rgba(27, 26, 26, 0.533);
   font-size: xx-large; 
-  text-align: end; 
+  text-align: center; 
 }
 .display-1{
   position: absolute;
